@@ -8,8 +8,9 @@ maintainers = ["Daniel Leal <dlleal@uc.cl>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.10.0"
 python-dotenv = "^0.21.0"
+openai = "^0.25.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.10.0"

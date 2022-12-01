@@ -11,6 +11,11 @@ build-env:
 	poetry run pip install --upgrade pip
 	poetry run poetry install
 
+# Runner
+.PHONY: run!
+run!:
+	poetry run python entrypoint.py
+
 # Passive linters
 .PHONY: black
 black:
