@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "taia-project"
+version = "0.1.0"
+description = "Code for the TAIA project regarding Prompting and Chain of Thought"
+license = "MIT"
+authors = ["Daniel Leal <dlleal@uc.cl>"]
+maintainers = ["Daniel Leal <dlleal@uc.cl>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.dev-dependencies]
+black = "^21.11b1"
+flake8 = "^4.0.1"
+isort = "^5.10.1"
+pylint = "^2.12.2"
+mypy = "^0.910"

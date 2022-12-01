@@ -1,0 +1,128 @@
+name: linters
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/linters.yml"
+      - ".flake8"
+      - ".pylintrc"
+      - "mypy.ini"
+      - "Makefile"
+      - "project/**/*.py"
+
+jobs:
+  black:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout to commit code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10.6"
+
+      - name: Install Poetry
+        run: |
+          make get-poetry
+          echo $HOME/.poetry/bin >> $GITHUB_PATH
+      - name: Set up environment cache
+        uses: actions/cache@v3
+        id: environment-cache
+        with:
+          key: environment-cache-v1-${{ hashFiles('**/poetry.lock') }}
+          path: .venv
+
+      - name: Install dependencies
+        if: steps.environment-cache.outputs.cache-hit != 'true'
+        run: poetry install
+
+      - name: Lint with Black
+        run: make black
+
+  flake8:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout to commit code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10.6"
+
+      - name: Install Poetry
+        run: |
+          make get-poetry
+          echo $HOME/.poetry/bin >> $GITHUB_PATH
+      - name: Set up environment cache
+        uses: actions/cache@v3
+        id: environment-cache
+        with:
+          key: environment-cache-v1-${{ hashFiles('**/poetry.lock') }}
+          path: .venv
+
+      - name: Install dependencies
+        if: steps.environment-cache.outputs.cache-hit != 'true'
+        run: poetry install
+
+      - name: Lint with Flake8
+        run: make flake8
+
+  isort:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout to commit code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10.6"
+
+      - name: Install Poetry
+        run: |
+          make get-poetry
+          echo $HOME/.poetry/bin >> $GITHUB_PATH
+      - name: Set up environment cache
+        uses: actions/cache@v3
+        id: environment-cache
+        with:
+          key: environment-cache-v1-${{ hashFiles('**/poetry.lock') }}
+          path: .venv
+
+      - name: Install dependencies
+        if: steps.environment-cache.outputs.cache-hit != 'true'
+        run: poetry install
+
+      - name: Lint with Isort
+        run: make isort
+
+  pylint:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout to commit code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10.6"
+
+      - name: Install Poetry
+        run: |
+          make get-poetry
+          echo $HOME/.poetry/bin >> $GITHUB_PATH
+      - name: Set up environment cache
+        uses: actions/cache@v3
+        id: environment-cache
+        with:
+          key: environment-cache-v1-${{ hashFiles('**/poetry.lock') }}
+          path: .venv
+
+      - name: Install dependencies
+        if: steps.environment-cache.outputs.cache-hit != 'true'
+        run: poetry install
+
+      - name: Lint with Pylint
+        run: make pylint
