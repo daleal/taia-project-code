@@ -21,6 +21,7 @@ class Datasets:
         cls.__svamp = list(
             map(
                 lambda x: {
+                    "id": x["ID"],
                     "question": x["Body"].strip() + " " + x["Question"].strip(),
                     "answer": str(x["Answer"]).rstrip(".0"),
                 },

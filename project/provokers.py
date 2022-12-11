@@ -1,15 +1,13 @@
-from typing import Literal, Union, overload
+from typing import Literal, overload
 
 from project.errors import InvalidProvokerModeError
-
-ProvokerMode = Union[
-    Literal["default"],
-    Literal["specific"],
-]
+from project.types import ProvokerMode
 
 
 @overload
-def chain_of_thought_provoker(mode: Literal["default"] = "default") -> str:
+def chain_of_thought_provoker(
+    mode: Literal["default"] = "default", steps: None = None
+) -> str:
     ...
 
 

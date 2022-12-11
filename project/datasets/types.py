@@ -11,5 +11,6 @@ class SVAMPInstance(TypedDict):
 
 
 class QuestionInstance(TypedDict):
+    id: str
     question: str
     answer: str
