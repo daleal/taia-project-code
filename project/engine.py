@@ -10,6 +10,7 @@ from project.datasets import Datasets
 from project.datasets.types import QuestionInstance
 from project.predictions import Predictions
 from project.provokers import chain_of_thought_provoker
+from project.stats import Stats
 from project.types import ProvokerMode
 from project.utils import format_question
 
@@ -19,6 +20,7 @@ class Engine:
     def run() -> None:
         if GENERATE_PREDICTIONS:
             Engine.__generate_predictions()
+        Engine.__process_predictions()
 
     @staticmethod
     def __generate_predictions() -> None:
@@ -43,6 +45,15 @@ class Engine:
         finally:
             print(f"Last execution was from index {data_point_index}")
             SVAMP_PREDICTIONS.save()
+
+    @staticmethod
+    def __process_predictions() -> None:
+        SVAMP_PREDICTIONS = Predictions.svamp(PROVOKER_MODE, PROVOKING_STEPS)
+        SVAMP_STATS = Stats.svamp(
+            SVAMP_PREDICTIONS.predictions, PROVOKER_MODE, PROVOKING_STEPS
+        )
+        SVAMP_STATS.save()
+        SVAMP_STATS.show_summary()
 
     @staticmethod
     def __predict_for_data_point(

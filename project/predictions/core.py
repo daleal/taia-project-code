@@ -16,7 +16,7 @@ class Predictions:
         predictions: list[PredictionInstance],
         dataset_name: str,
         provoker_mode: ProvokerMode,
-        provoking_steps: int | None,
+        provoking_steps: int | None = None,
     ) -> None:
         self.__predictions = predictions
         self.__dataset_name = dataset_name
