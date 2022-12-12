@@ -23,7 +23,7 @@ class Engine:
     @staticmethod
     def __generate_predictions() -> None:
         SVAMP_DATASET = Datasets.svamp()
-        SVAMP_PREDICTIONS = Predictions.svamp(PROVOKER_MODE)
+        SVAMP_PREDICTIONS = Predictions.svamp(PROVOKER_MODE, PROVOKING_STEPS)
         scoped_dataset = SVAMP_DATASET[INITIAL_DATA_POINT:FINAL_DATA_POINT]
         try:
             initial_index = INITIAL_DATA_POINT or 0
@@ -37,8 +37,9 @@ class Engine:
                     PROVOKER_MODE,
                     PROVOKING_STEPS,
                 )
-        except Exception:
+        except Exception as error:
             print(f"ERROR: Something happened at index {data_point_index}!")
+            print(error)
         finally:
             print(f"Last execution was from index {data_point_index}")
             SVAMP_PREDICTIONS.save()
