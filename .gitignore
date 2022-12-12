@@ -22,6 +22,3 @@ dist/
 
 # Secrets
 .env*
-
-# Runtime generations
-/predictions
