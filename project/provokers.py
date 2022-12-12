@@ -1,7 +1,12 @@
-from typing import Literal, overload
+from typing import Literal, Union, overload
 
 from project.errors import InvalidProvokerModeError
 from project.types import ProvokerMode
+
+ProvokerModesWithSteps = Union[
+    Literal["specific"],
+    Literal["lower-bound"],
+]
 
 
 @overload
@@ -12,7 +17,7 @@ def chain_of_thought_provoker(
 
 
 @overload
-def chain_of_thought_provoker(mode: Literal["specific"], steps: int) -> str:
+def chain_of_thought_provoker(mode: ProvokerModesWithSteps, steps: int) -> str:
     ...
 
 
@@ -24,4 +29,6 @@ def chain_of_thought_provoker(
         return "Let's think step by step."
     if mode == "specific":
         return f"Let's think step by step, using {steps} steps."
+    if mode == "lower-bound":
+        return f"Let's think step by step, using at least {steps} steps."
     raise InvalidProvokerModeError(f"Invalid provoker mode '{mode}'.")

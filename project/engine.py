@@ -59,7 +59,7 @@ class Engine:
         prediction = model.predict(prompt)
         predictions.add_prediction(
             {
-                "id": data_point['id'],
+                "id": data_point["id"],
                 "prompt": prompt,
                 "prediction": prediction,
                 "expected_answer": data_point["answer"],
