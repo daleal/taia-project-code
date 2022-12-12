@@ -6,6 +6,7 @@ from project.types import ProvokerMode
 ProvokerModesWithSteps = Union[
     Literal["specific"],
     Literal["lower-bound"],
+    Literal["upper-bound"],
 ]
 
 
@@ -31,4 +32,6 @@ def chain_of_thought_provoker(
         return f"Let's think step by step, using {steps} steps."
     if mode == "lower-bound":
         return f"Let's think step by step, using at least {steps} steps."
+    if mode == "upper-bound":
+        return f"Let's think step by step, using no more than {steps} steps."
     raise InvalidProvokerModeError(f"Invalid provoker mode '{mode}'.")

@@ -4,4 +4,5 @@ ProvokerMode = Union[
     Literal["default"],
     Literal["specific"],
     Literal["lower-bound"],
+    Literal["upper-bound"],
 ]
