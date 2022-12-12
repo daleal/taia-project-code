@@ -35,7 +35,10 @@ class Stats:
 
     def show_summary(self) -> None:
         correct_amount = filter(lambda x: x["correct"], self.__stats)
-        print(len(list(correct_amount)) / len(self.__stats))
+        correct_percentage = len(list(correct_amount)) / len(self.__stats)
+        average_steps = sum(map(lambda x: x["steps"], self.__stats)) / len(self.__stats)
+        print(f"Accuracy: {correct_percentage * 100}%")
+        print(f"Average steps: {round(average_steps, 2)}")
 
     def save(self) -> None:
         if not os.path.isdir("stats"):
